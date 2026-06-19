@@ -24,9 +24,18 @@ print("GMAIL_APP_PASSWORD =", GMAIL_APP_PASSWORD)
 def send_email_notification(student, title, category):
 
     print("EMAIL FUNCTION CALLED")
+
     try:
+
         print("GMAIL_EMAIL =", GMAIL_EMAIL)
         print("APP PASSWORD =", GMAIL_APP_PASSWORD)
+
+        import socket
+
+        try:
+            print("SMTP IP =", socket.gethostbyname("smtp.gmail.com"))
+        except Exception as e:
+            print("DNS ERROR:", e)
 
         msg = MIMEMultipart()
 
@@ -34,12 +43,10 @@ def send_email_notification(student, title, category):
         msg["To"] = ADMIN_EMAIL
         msg["Subject"] = "New Campus Complaint"
 
-        APP_URL = "https://your-app-name.onrender.com"
-
-        APP_URL = "https://your-app-name.onrender.com"
+        APP_URL = "https://campus-problem-detective--1.onrender.com"
 
         body = f"""
-🔔 New Complaint Submitted
+New Complaint Submitted
 
 Student: {student}
 Title: {title}
@@ -48,7 +55,6 @@ Category: {category}
 Open Admin Dashboard:
 {APP_URL}/admin-login
 """
-
 
         msg.attach(MIMEText(body, "plain"))
 
